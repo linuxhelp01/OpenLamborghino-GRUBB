@@ -3,7 +3,7 @@
 int last_error = 0;  // Variable para almacenar el último error calculado, utilizada para el término derivativo.
 
 /**
- * @brief Calcula la señal de control utilizando un controlador PID simplificado para un seguidor de línea.
+ * @brief Calcula la señal de control utilizando un controlador PD simplificado para un seguidor de línea.
  * 
  * Esta función implementa un controlador PID básico, donde el setpoint se fija en 0 (el robot debe estar centrado en la línea).
  * El control se basa en el error de posición actual y la derivada de este error, lo que permite ajustar la dirección del robot
