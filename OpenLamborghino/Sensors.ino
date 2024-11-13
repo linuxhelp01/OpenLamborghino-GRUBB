@@ -17,14 +17,14 @@ const int his_sensor[2] = { 325, 150 };  // Histéresis para los sensores latera
  * @brief Lee los valores de los sensores infrarrojos conectados a los pines analógicos del Arduino.
  */
 void LeerSensores() {
-  s[0] = analogRead(A7);  // Sensor HL (lateral izquierdo)
+  s[0] = analogRead(A0);  // Sensor HL (lateral izquierdo)
   s[1] = analogRead(A6);  // Sensor D7
   s[2] = analogRead(A5);  // Sensor D6
   s[3] = analogRead(A4);  // Sensor D5
   s[4] = analogRead(A3);  // Sensor D4
   s[5] = analogRead(A2);  // Sensor D3
   s[6] = analogRead(A1);  // Sensor D2
-  s[7] = analogRead(A0);  // Sensor HR (lateral derecho)
+  s[7] = analogRead(A7);  // Sensor HR (lateral derecho)
 }
 
 /**
