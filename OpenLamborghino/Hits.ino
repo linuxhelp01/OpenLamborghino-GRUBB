@@ -5,7 +5,9 @@ bool HR_flag = 0;  // Bandera para indicar que el sensor lateral derecho ha dete
 
 unsigned long flag_ms = 0;  // Almacena el tiempo en milisegundos desde la última detección de un pad.
 
-int direccion = -1;  // Variable para almacenar la dirección del robot (-1: no definida, 0: izquierda, 1: derecha).
+
+// Tiempo de delay para toma de decicion de bandera o meta
+#define T_flag 50
 
 /**
  * @brief Detecta y maneja los eventos basados en la lectura de los sensores laterales.
@@ -35,32 +37,20 @@ void GetGeo() {
   } 
   // Si solo el sensor izquierdo detectó un pad y luego dejó de detectarlo, es una curva o fin de pista.
   else if (!HL && !HR && HL_flag && !HR_flag) {
-    if (millis() - flag_ms > 100) {  // Asegura un tiempo mínimo para confirmar la detección.
+    if (millis() - flag_ms > T_flag) {  // Asegura un tiempo mínimo para confirmar la detección.
       HL_flag = 0;
       HR_flag = 0;
 
-      if (direccion == -1)  // Si la dirección no está definida, la establece como 0 (izquierda).
-        direccion = 0;
-
-      if (direccion)
         curve_sensor();  // Llama a la función de manejo de curvas.
-      else
-        finish_sensor();  // Llama a la función de manejo de fin de pista.
     }
   } 
   // Si solo el sensor derecho detectó un pad y luego dejó de detectarlo, es una curva o fin de pista.
   else if (!HL && !HR && !HL_flag && HR_flag) {
-    if (millis() - flag_ms > 100) {  // Asegura un tiempo mínimo para confirmar la detección.
+    if (millis() - flag_ms > T_flag) {  // Asegura un tiempo mínimo para confirmar la detección.
       HL_flag = 0;
       HR_flag = 0;
 
-      if (direccion == -1)  // Si la dirección no está definida, la establece como 1 (derecha).
-        direccion = 1;
-
-      if (direccion)
         finish_sensor();  // Llama a la función de manejo de fin de pista.
-      else
-        curve_sensor();  // Llama a la función de manejo de curvas.
     }
   }
 
