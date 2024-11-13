@@ -30,16 +30,16 @@ Esto es debido a que el Arduino Nano solo tiene 8 entradas analógicas, y se req
 #define PIN_BIN2 9  // Pin 2 de dirección del Motor Derecho.
 #define PIN_PWMB 6  // Pin PWM del Motor Derecho.
 
-#define kp 0.07  // Constante proporcional para el control PID.
-#define kd 0.8   // Constante derivativa para el control PID.
+#define kp 0.045  // Constante proporcional para el control PID.
+#define kd 0.75   // Constante derivativa para el control PID.
 
 // Define para habilitar o deshabilitar los mensajes de depuración
-// #define ENABLE_DEBUG
+//#define ENABLE_DEBUG
 
 // Define para habilitar la función de detección de hits
 #define ENABLE_HITS
 
-int base_speed = 70;  // Velocidad base del robot.
+int base_speed = 90;  // Velocidad base del robot.
 
 bool linea = 0;   // 1 para línea negra, 0 para línea blanca.
 bool online = 0;  // Indica si el robot está detectando la línea.
@@ -135,7 +135,7 @@ void loop() {
       finish_ms = millis();   // Actualiza el tiempo del último cruce por meta.
       finish_count = 3;
     } else if (finish_count == 3) {
-      if (millis() - finish_ms > 300)
+      if (millis() - finish_ms > 50)
         state = false;
     }
 #endif
